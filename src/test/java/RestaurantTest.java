@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
@@ -78,4 +80,27 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    /*<<<<<<<<<<<<<<<<<<<<<<<Get Total Cost - Start>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+    @Test
+    public void get_total_cost_should_return_correct_sum_of_all_the_items_added_in_the_list(){
+        // Arrange
+        restaurant = createRestaurantWithMenuForTesting();
+        restaurant.addToMenu("Steak with mashed potatoes",326);
+        restaurant.addToMenu("French Fries", 80);
+        restaurant.addToMenu("Tiramisu", 180);
+
+        int expectedTotal = 326 + 80 + 180;
+        List<String> menuItemsToBeTotaled = new ArrayList<String>();
+        menuItemsToBeTotaled.add("Steak with mashed potatoes");
+        menuItemsToBeTotaled.add("French Fries");
+        menuItemsToBeTotaled.add("Tiramisu");
+
+        // Act
+        int totalCost = restaurant.calculateTotalOrderCost(menuItemsToBeTotaled);
+
+        // Assert
+        assertEquals(expectedTotal, totalCost);
+    }
+    /*<<<<<<<<<<<<<<<<<<<<<<<Get Total Cost - End>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 }
