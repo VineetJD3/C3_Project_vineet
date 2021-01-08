@@ -102,5 +102,18 @@ class RestaurantTest {
         // Assert
         assertEquals(expectedTotal, totalCost);
     }
+
+    @Test
+    public void get_total_cost_should_return_zero_if_list_passed_is_empty(){
+        // Arrange
+        restaurant = createRestaurantWithMenuForTesting();
+        List<String> menuItemsToBeTotaled = new ArrayList<String>();
+
+        // Act
+        int totalCost = restaurant.calculateTotalOrderCost(menuItemsToBeTotaled);
+
+        // Assert
+        assertEquals(0, totalCost);
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<Get Total Cost - End>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 }
